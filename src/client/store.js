@@ -1,10 +1,10 @@
 ZenStore = class ZenStore {
-  constructor(reducer, initialState) {
-    if (!_.isFunction(reducer)) {
+  constructor(procedure, initialState) {
+    if (!_.isFunction(procedure)) {
       throw new Error('Stores must be constructed with reducer functions');
     }
     check(initialState, Object);
-    this.currentReducer = reducer;
+    this.currentProcedure = procedure;
 
     // a null mongo collection to hold the single document
     this._collection = new Mongo.Collection(null);
@@ -49,7 +49,7 @@ ZenStore = class ZenStore {
   /**
    * Dispatches an action. It is the only way to trigger a state change.
    *
-   * The `reducer` function, used to create the store, will be called with the
+   * The `procedure` function, used to create the store, will be called with the
    * current state tree and the given `action`. Its return value will
    * be considered the **next** state of the tree, and the change will be broadcasted
    * by Tracker
@@ -78,7 +78,7 @@ ZenStore = class ZenStore {
 
     try {
       this.isDispatching = true;
-      this.currentReducer(this.getCollection(), action)
+      this.currentProcedure(this.getCollection(), action)
     } finally {
       this.isDispatching = false
     }
