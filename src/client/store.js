@@ -1,7 +1,7 @@
 ZenStore = class ZenStore {
   constructor(procedure, initialState) {
     if (!_.isFunction(procedure)) {
-      throw new Error('Stores must be constructed with reducer functions');
+      throw new Error('Stores must be constructed with procedure functions');
     }
     check(initialState, Object);
     this.currentProcedure = procedure;
@@ -19,14 +19,6 @@ ZenStore = class ZenStore {
    */
   getState(options) {
     return this._collection.findOne({}, options);
-  }
-
-  /**
-   * Remove all contents of the store
-   * @returns {*}
-   */
-  clearStore() {
-    return this._collection.remove({});
   }
 
   /**
@@ -73,7 +65,7 @@ ZenStore = class ZenStore {
     }
 
     if (this.isDispatching) {
-      throw new Meteor.Error('Reducers may not dispatch actions.')
+      throw new Meteor.Error('Procedures may not dispatch actions.')
     }
 
     try {
