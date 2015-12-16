@@ -18,5 +18,5 @@ Package.onUse(function (api) {
     'src/client/store.js'
   ], ['client']);
 
-  api.export('ZenStore', 'ZenProcess');
+  api.export(['ZenStore', 'ZenProcess'], ['client']);
 });
