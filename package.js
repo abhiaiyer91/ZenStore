@@ -1,6 +1,6 @@
 Package.describe({
   name: 'zenflux:store',
-  version: '0.0.2',
+  version: '0.0.3',
   summary: 'A Class for Managing State on the Client',
   documentation: 'README.md'
 });
